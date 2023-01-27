@@ -1,0 +1,105 @@
+package com.company;
+
+import java.awt.*;
+
+/**
+ * Creates a Saab95 with the extension of the Car class.
+ *
+ * @author Calle Bjureblad
+ * @version 1.0
+ * @since 1.0
+ *
+ */
+public class Saab95 extends Car implements Movable {
+    private boolean turboOn; // The state of the turbo (on/off)
+    protected Coords currDir = Coords.N; // Initial direction the car is facing
+    protected double x,y = 0; // Initial starting position of the car
+
+    /**
+     * Creates a Saab95 with parameters inherited from Car class
+     */
+    public Saab95(){
+        super(2, 125, Color.red, "Saab95");
+        turboOn = false;
+    }
+
+    /**
+     * Sets the turbo to true (the turbo is on)
+     */
+    public void setTurboOn(){
+        turboOn = true;
+    }
+
+    /**
+     * Sets the turbo to false (the turbo is off)
+     */
+    public void setTurboOff(){
+        turboOn = false;
+    }
+
+    /**
+     * Returns the speed factor, and can be different depending on if turbo is on or off.
+     *
+     * @return the speed factor
+     */
+    public double speedFactor(){
+        double turbo = 1;
+        if(turboOn) turbo = 1.3;
+        return enginePower * 0.01 * turbo;
+    }
+
+    /**
+     * Sets the current speed of the car to a new value, the method ONLY increases the speed.
+     *
+     * @param amount the amount the car should increase speed by
+     */
+    public void incrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+    }
+
+    /**
+     * Sets the current speed of the car to a new value, the method ONLY decreases the speed.
+     *
+     * @param amount the amount the car should decrease speed by
+     */
+    public void decrementSpeed(double amount){
+        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }
+
+    /**
+     * Moves the car in the current direction the car is facing, by adding the current speed to the x or y -axis.
+     */
+    public void move() {
+        switch (currDir) {
+            case N -> x += getCurrentSpeed();
+            case E -> y += getCurrentSpeed();
+            case S -> x += getCurrentSpeed() * (-1);
+            case W -> y += getCurrentSpeed() * (-1);
+        }
+    }
+
+    /**
+     * Turns the car to the left from the current direction and changes the current direction to a new one.
+     */
+    public void turnLeft() {
+        switch (currDir) {
+            case N -> currDir = Coords.W;
+            case E -> currDir = Coords.N;
+            case S -> currDir = Coords.E;
+            case W -> currDir = Coords.S;
+        }
+    }
+
+    /**
+     * Turns the car to the left from the current direction and changes the current direction to a new one.
+     */
+    public void turnRight() {
+        switch (currDir) {
+            case N -> currDir = Coords.E;
+            case E -> currDir = Coords.S;
+            case S -> currDir = Coords.W;
+            case W -> currDir = Coords.N;
+        }
+    }
+
+}
