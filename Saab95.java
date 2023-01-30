@@ -42,6 +42,7 @@ public class Saab95 extends Car implements Movable {
      *
      * @return the speed factor
      */
+    @Override
     public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
@@ -53,6 +54,7 @@ public class Saab95 extends Car implements Movable {
      *
      * @param amount the amount the car should increase speed by
      */
+    @Override
     public void incrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() + speedFactor() * amount;
     }
@@ -62,6 +64,7 @@ public class Saab95 extends Car implements Movable {
      *
      * @param amount the amount the car should decrease speed by
      */
+    @Override
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }
