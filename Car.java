@@ -129,7 +129,7 @@ abstract class Car {
         incrementSpeed(amount);
 
         if (initSpeed > getCurrentSpeed() || getCurrentSpeed() > getEnginePower()) {
-            decrementSpeed(amount);
+            currentSpeed = initSpeed;
         }
     }
 
@@ -146,7 +146,7 @@ abstract class Car {
         decrementSpeed(amount);
 
         if (initSpeed < getCurrentSpeed() || getCurrentSpeed() < 0) {
-            incrementSpeed(amount);
+            currentSpeed = 0;
         }
     }
 }
